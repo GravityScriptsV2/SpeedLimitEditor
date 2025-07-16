@@ -1,30 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Coming Soon</title>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
-  <link rel="stylesheet" href="./assets/css/styles.css" />
-</head>
-<body class="dark">
-  <div class="coming-soon-card">
-    <h1 class="coming-soon-title">
-      Speed Limit Editor
-    </h1>
-    <p class="coming-soon-subtitle">
-      We're working hard to bring you something great.<br />
-      Stay tuned!
-    </p>
-    <button class="btn-outline" disabled>
-      <i class="fas fa-hourglass-half"></i> Coming Soon
-    </button>
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Speed Limit Editor</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body class="dark">
+    <div class="beta-warning">
+      <p>
+        ⚠️ The UI and features are not final. This is our first set of tools for
+        the plugin. Thanks for testing!
+      </p>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-container">
+        <!-- Roads List -->
+        <div class="roads-panel">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Roads</h2>
+              <div class="road-count" id="roadCount">0 roads</div>
+            </div>
+            <div class="action-buttons">
+              <input
+                type="file"
+                id="fileInput"
+                accept=".json"
+                style="display: none"
+              />
+
+              <button class="btn btn-outline" id="loadBtn">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                Load JSON
+              </button>
+
+              <button class="btn btn-outline" id="exportBtn" disabled>
+                <i class="fas fa-download"></i>
+                Export
+              </button>
+            </div>
+            <div class="search-bar">
+              <input
+                type="search"
+                id="searchRoads"
+                class="form-input"
+                placeholder="Search roads..."
+                autocomplete="off"
+                disabled
+              />
+              <select
+                id="filterDropdown"
+                class="filter-dropdown"
+                aria-label="Filter roads"
+                disabled
+              >
+                <option
+                  value="all"
+                  title="Show all roads regardless of speed limit"
+                >
+                  All
+                </option>
+                <option
+                  value="slow"
+                  title="Very slow roads like steep hills or tight turns, 5-15 mph"
+                >
+                  Local Access / Slow
+                </option>
+                <option
+                  value="residential"
+                  title="Residential neighborhoods and business areas, 25-30 mph"
+                >
+                  Residential Streets
+                </option>
+                <option
+                  value="collector"
+                  title="Collector roads connecting neighborhoods, 35-45 mph"
+                >
+                  Collector Streets
+                </option>
+                <option
+                  value="arterial"
+                  title="Major city roads with higher speeds, 50-60 mph"
+                >
+                  Arterial Roads
+                </option>
+              </select>
+            </div>
+            <div class="card-content">
+              <div id="roadsList" class="roads-list">
+                <div class="empty-state">
+                  No roads loaded. Load a JSON file to get started.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Editor Panel -->
+        <div class="editor-panel">
+          <div class="card">
+            <div id="editorContent" class="editor-content">
+              <div class="empty-editor">
+                <div class="empty-editor-content">
+                  <div class="empty-title">No road selected</div>
+                  <div class="empty-subtitle">
+                    Select a road from the list to edit its speed limits
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="./assets/js/editor.js"></script>
+  </body>
 </html>
